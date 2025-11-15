@@ -65,17 +65,28 @@ function showStartOverlay() {
     return;
   }
 
-  const overlay = document.createElement("div");
-  overlay.className = "start-overlay";
-  overlay.innerHTML = `
-    <div class="start-card">
-      <h1>🌿 Raumpsychologie v3</h1>
-      <p>Klarheit ohne Kampf</p>
-      <button id="start-btn" class="cta">Start</button>
-      <small>Offline · Zwei Sprachen · Light/Dark</small>
-    </div>
-  `;
-  document.body.appendChild(overlay);
+const overlay = document.getElementById("nav-overlay");
+const drawer = document.getElementById("nav-drawer");
+const openBtn = document.getElementById("drawer-btn");
+const closeBtn = document.getElementById("nav-close");
+
+// Öffnen
+openBtn.addEventListener("click", () => {
+  overlay.classList.add("show");
+});
+
+// Schließen über Button
+closeBtn.addEventListener("click", () => {
+  overlay.classList.remove("show");
+});
+
+// Schließen beim Klick außerhalb
+overlay.addEventListener("click", (e) => {
+  if (!drawer.contains(e.target)) {
+    overlay.classList.remove("show");
+  }
+});
+
 
   document.getElementById("start-btn").addEventListener("click", () => {
     overlay.classList.add("fade-out");
