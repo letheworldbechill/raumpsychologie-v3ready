@@ -129,3 +129,21 @@ navClose.addEventListener("click", () => (navOverlay.hidden = true));
 navOverlay.addEventListener("click", (e) => {
   if (e.target === navOverlay) navOverlay.hidden = true;
 });
+const drawer = document.getElementById("drawer");
+const overlay = document.getElementById("drawerOverlay");
+const navToggle = document.getElementById("navToggle");
+const closeDrawer = document.getElementById("closeDrawer");
+
+function openDrawer() {
+  drawer.classList.add("open");
+  overlay.classList.add("open");
+}
+
+function closeDrawerFn() {
+  drawer.classList.remove("open");
+  overlay.classList.remove("open");
+}
+
+navToggle.addEventListener("click", openDrawer);
+closeDrawer.addEventListener("click", closeDrawerFn);
+overlay.addEventListener("click", closeDrawerFn);
