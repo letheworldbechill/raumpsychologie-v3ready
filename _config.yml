@@ -1,0 +1,20 @@
+include:
+  - index.html
+  - app.js
+  - router.js
+  - ui.js
+  - state.js
+  - i18n.js
+  - intro.js
+  - wohnung.js
+  - raumscan.js
+  - resonanz.js
+  - bindung.js
+  - restladung.js
+  - minireset.js
+  - musterarchiv.js
+  - rahmung.js
+  - diplomatie.js
+  - styles.css
+  - manifest.webmanifest
+permalink: pretty
