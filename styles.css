@@ -1,0 +1,499 @@
+/* =======================================
+   Raumpsychologie v3 – styles.css
+   4px Spacing System
+   ======================================= */
+
+/* ----- Spacing Scale (4px Grid) ----- */
+:root {
+  --s-4: 4px;
+  --s-8: 8px;
+  --s-12: 12px;
+  --s-16: 16px;
+  --s-20: 20px;
+  --s-24: 24px;
+  --s-32: 32px;
+  --s-40: 40px;
+  --s-48: 48px;
+
+  --bg: #ffffff;
+  --fg: #1f2933;
+  --muted: #6b7280;
+
+  --panel: #f4f5f7;
+  --panel-border: #d2d6dc;
+
+  --accent: #16a34a;
+  --accent-soft: #dcfce7;
+  --accent-dark: #15803d;
+
+  --pill-green: #22c55e;
+  --pill-yellow: #eab308;
+  --pill-orange: #f97316;
+  --pill-red: #ef4444;
+
+  --shadow-soft: 0 8px 20px rgba(15, 23, 42, 0.08);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+
+  --transition-fast: 0.15s ease-out;
+}
+
+/* Dark Mode – aktiviert durch data-theme="dark" im <body> */
+body[data-theme="dark"] {
+  --bg: #020617;
+  --fg: #e5e7eb;
+  --muted: #9ca3af;
+
+  --panel: #020617;
+  --panel-border: #111827;
+
+  --accent: #4ade80;
+  --accent-soft: #022c22;
+  --accent-dark: #22c55e;
+
+  --shadow-soft: 0 8px 26px rgba(0, 0, 0, 0.45);
+}
+
+/* ----- Global Reset-ish ----- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ----- App Layout ----- */
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--s-12) var(--s-20);
+  border-bottom: 1px solid var(--panel-border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(14px);
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 20px;
+  letter-spacing: 0.02em;
+  display: flex;
+  align-items: center;
+  gap: var(--s-8);
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--s-8);
+}
+
+/* Main view */
+.view {
+  flex: 1;
+  padding: var(--s-24) var(--s-12) var(--s-24);
+}
+
+/* Footer */
+.app-footer {
+  padding: var(--s-8) var(--s-16) var(--s-12);
+  font-size: 13px;
+  color: var(--muted);
+  text-align: center;
+  border-top: 1px solid var(--panel-border);
+}
+
+/* ----- Buttons & Inputs ----- */
+button,
+select {
+  font: inherit;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--panel-border);
+  background: var(--panel);
+  color: var(--fg);
+  padding: 0 var(--s-12);
+  height: var(--s-32); /* kompakter für Header */
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-4);
+  cursor: pointer;
+  transition: border-color var(--transition-fast),
+              background-color var(--transition-fast),
+              transform var(--transition-fast),
+              box-shadow var(--transition-fast);
+}
+
+button:hover {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--panel) 80%, var(--accent-soft) 20%);
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+/* CTA / Primary Button */
+.cta {
+  background: var(--accent);
+  color: #f9fafb;
+  border-color: var(--accent-dark);
+  box-shadow: var(--shadow-soft);
+  height: var(--s-40);
+  padding: 0 var(--s-16);
+  font-weight: 600;
+}
+
+.cta:hover {
+  background: var(--accent-dark);
+}
+
+/* Flow-Navigation Buttons (Prev/Next) */
+.flow-btn {
+  width: var(--s-32);
+  height: var(--s-32);
+  border-radius: var(--radius-sm);
+  justify-content: center;
+}
+
+/* Menu Button */
+.menu-btn {
+  width: var(--s-32);
+  height: var(--s-32);
+  justify-content: center;
+}
+
+/* Inputs, Textareas */
+textarea {
+  width: 100%;
+  min-height: 96px;
+  padding: var(--s-12);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--panel-border);
+  background: var(--bg);
+  color: var(--fg);
+  font: inherit;
+  resize: vertical;
+}
+
+input[type="range"] {
+  width: 100%;
+}
+
+/* Selects in Panels */
+.panel select {
+  width: 100%;
+  height: var(--s-32);
+}
+
+/* ----- Panels / Cards ----- */
+.panel {
+  background: var(--panel);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--panel-border);
+  box-shadow: var(--shadow-soft);
+  padding: var(--s-20);
+  margin: 0 auto var(--s-24);
+  max-width: 860px;
+}
+
+.panel h2 {
+  margin: 0 0 var(--s-8);
+  font-size: 20px;
+}
+
+.panel h3 {
+  margin: var(--s-12) 0 var(--s-8);
+  font-size: 16px;
+}
+
+/* Big intro text */
+.big {
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+/* Small muted note */
+.note {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* Simple HR */
+hr.s {
+  border: 0;
+  border-top: 1px solid var(--panel-border);
+  margin: var(--s-16) 0;
+}
+
+/* ----- Grid & List Layouts ----- */
+.grid {
+  display: grid;
+  gap: var(--s-12);
+}
+
+.grid.cols-2 {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-8);
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+  padding: var(--s-8) var(--s-8);
+  border-radius: var(--radius-sm);
+}
+
+/* kv-Layout (textarea + button etc.) */
+.kv {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-12);
+}
+
+.center {
+  text-align: center;
+}
+
+/* ----- Pills / Badges ----- */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--s-4) var(--s-12);
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.pill.green { background: var(--pill-green); color: #f9fafb; }
+.pill.yellow { background: var(--pill-yellow); color: #111827; }
+.pill.orange { background: var(--pill-orange); color: #f9fafb; }
+.pill.red { background: var(--pill-red); color: #f9fafb; }
+
+/* ----- Start Overlay ----- */
+.start-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.70);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.start-card {
+  background: var(--panel);
+  border-radius: var(--radius-lg);
+  padding: var(--s-24);
+  width: min(420px, 100% - 2 * var(--s-24));
+  box-shadow: var(--shadow-soft);
+  text-align: center;
+}
+
+.start-card h1 {
+  margin: 0 0 var(--s-8);
+}
+
+.start-card p {
+  margin: 0 0 var(--s-16);
+}
+
+.start-card .cta {
+  width: 100%;
+  justify-content: center;
+  margin-bottom: var(--s-12);
+}
+
+.start-card small {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* Fade-out Animation */
+.start-overlay.fade-out {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s ease-out;
+}
+
+/* ----- Save Indicators ----- */
+.save-blink {
+  position: fixed;
+  left: var(--s-16);
+  bottom: var(--s-16);
+  font-size: 20px;
+  opacity: 0.4;
+  transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+}
+
+.save-blink.active {
+  transform: translateY(-4px);
+  opacity: 1;
+}
+
+/* ----- Flow Footer (Progress + Prev/Next) ----- */
+.flow-nav {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--s-12);
+  padding: var(--s-8) var(--s-16);
+  border-top: 1px solid var(--panel-border);
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter: blur(10px);
+  z-index: 9;
+}
+
+.flow-progress {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+}
+
+.progress-bar {
+  height: 4px;
+  border-radius: 999px;
+  background: var(--panel-border);
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-bar::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 40%;
+  background: linear-gradient(90deg, var(--accent-soft), var(--accent));
+}
+
+/* Kleine Steps (nur Deko) */
+.steps {
+  display: flex;
+  gap: 2px;
+}
+
+.step {
+  flex: 1;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--panel-border);
+}
+
+/* ----- Nav-Overlay (Hamburger Menu) ----- */
+.nav-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.68);
+  display: flex;
+  justify-content: flex-end;
+  z-index: 40;
+}
+
+.nav-drawer {
+  width: min(320px, 100% - var(--s-24));
+  background: var(--panel);
+  padding: var(--s-20);
+  border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-16);
+}
+
+.nav-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--s-8);
+}
+
+.nav-main {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-8);
+}
+
+.nav-main button {
+  width: 100%;
+  justify-content: flex-start;
+}
+
+.nav-main button.active {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.nav-divider {
+  border: 0;
+  border-top: 1px solid var(--panel-border);
+  margin: var(--s-16) 0;
+}
+
+.nav-settings h3 {
+  margin: 0 0 var(--s-8);
+  font-size: 14px;
+}
+
+/* ----- Modal (ui.js) ----- */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.64);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 60;
+}
+
+.modal-backdrop.show {
+  display: flex;
+}
+
+.modal {
+  max-width: 420px;
+}
+
+/* ----- Responsiveness ----- */
+@media (min-width: 768px) {
+  .app-header h1 {
+    font-size: 22px;
+  }
+
+  .view {
+    padding: var(--s-24) var(--s-24) var(--s-24);
+  }
+}
