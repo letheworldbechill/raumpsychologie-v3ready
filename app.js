@@ -60,42 +60,8 @@ if ("serviceWorker" in navigator) {
 
 /* ---------- START OVERLAY ---------- */
 function showStartOverlay() {
-  if (localStorage.getItem("rpv3.overlayShown")) {
-    renderRoute();
-    return;
-  }
-
-const overlay = document.getElementById("nav-overlay");
-const drawer = document.getElementById("nav-drawer");
-const openBtn = document.getElementById("drawer-btn");
-const closeBtn = document.getElementById("nav-close");
-
-// Öffnen
-openBtn.addEventListener("click", () => {
-  overlay.classList.add("show");
-});
-
-// Schließen über Button
-closeBtn.addEventListener("click", () => {
-  overlay.classList.remove("show");
-});
-
-// Schließen beim Klick außerhalb
-overlay.addEventListener("click", (e) => {
-  if (!drawer.contains(e.target)) {
-    overlay.classList.remove("show");
-  }
-});
-
-
-  document.getElementById("start-btn").addEventListener("click", () => {
-    overlay.classList.add("fade-out");
-    localStorage.setItem("rpv3.overlayShown", "true");
-    setTimeout(() => {
-      overlay.remove();
-      renderRoute();
-    }, 600);
-  });
+  // No start overlay is implemented, just render the route directly
+  renderRoute();
 }
 
 /* ---------- SAVE INDICATOR ---------- */
@@ -117,18 +83,14 @@ export function showSaveBlink() {
   blink._timer = setTimeout(() => blink.classList.remove("active"), 900);
 }
 
+// Expose save indicator functions globally for state.js
+window.showSaveIndicator = showSaveIndicator;
+window.showSaveBlink = showSaveBlink;
+
 /* ---------- INITIAL START ---------- */
 showStartOverlay();
-/* ---------- HAMBURGER NAV ---------- */
-const menuBtn = document.getElementById("menu-toggle");
-const navOverlay = document.getElementById("nav-overlay");
-const navClose = document.getElementById("nav-close");
 
-menuBtn.addEventListener("click", () => (navOverlay.hidden = false));
-navClose.addEventListener("click", () => (navOverlay.hidden = true));
-navOverlay.addEventListener("click", (e) => {
-  if (e.target === navOverlay) navOverlay.hidden = true;
-});
+/* ---------- HAMBURGER NAV ---------- */
 const drawer = document.getElementById("drawer");
 const overlay = document.getElementById("drawerOverlay");
 const navToggle = document.getElementById("navToggle");
@@ -147,3 +109,23 @@ function closeDrawerFn() {
 navToggle.addEventListener("click", openDrawer);
 closeDrawer.addEventListener("click", closeDrawerFn);
 overlay.addEventListener("click", closeDrawerFn);
+
+/* ---------- MENU NAV (in header toolbar) ---------- */
+const menuToggle = document.getElementById("menu-toggle");
+const navOverlay = document.getElementById("nav-overlay");
+const navClose = document.getElementById("nav-close");
+const navDrawer = document.getElementById("nav-drawer");
+
+if (menuToggle && navOverlay && navClose) {
+  menuToggle.addEventListener("click", () => {
+    navOverlay.hidden = false;
+  });
+  navClose.addEventListener("click", () => {
+    navOverlay.hidden = true;
+  });
+  navOverlay.addEventListener("click", (e) => {
+    if (navDrawer && !navDrawer.contains(e.target)) {
+      navOverlay.hidden = true;
+    }
+  });
+}
